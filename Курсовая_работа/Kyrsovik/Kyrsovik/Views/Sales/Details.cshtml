@@ -1,0 +1,42 @@
+﻿@model Kyrsovik.Models.Sales
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sales</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_sale)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_sale)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Products.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staff.FIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staff.FIO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_sale }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

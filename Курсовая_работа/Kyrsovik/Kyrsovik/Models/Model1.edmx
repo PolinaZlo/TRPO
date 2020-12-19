@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Polina_ZlobinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Catygories">
+          <Key>
+            <PropertyRef Name="ID_category" />
+          </Key>
+          <Property Name="ID_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_category" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID_owner" />
+          </Key>
+          <Property Name="ID_owner" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="E_mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Requisites" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_position" />
+          </Key>
+          <Property Name="ID_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID_product" />
+          </Key>
+          <Property Name="ID_product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_owner" Type="int" Nullable="false" />
+          <Property Name="ID_status" Type="int" Nullable="false" />
+          <Property Name="ID_category" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="Num_off" Type="int" Nullable="false" />
+          <Property Name="Data_start" Type="date" Nullable="false" />
+          <Property Name="Data_end" Type="date" Nullable="false" />
+          <Property Name="Commentary" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="ID_sale" />
+          </Key>
+          <Property Name="ID_sale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_product" Type="int" Nullable="false" />
+          <Property Name="ID_staff" Type="int" Nullable="false" />
+          <Property Name="Data_sale" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_staff" />
+          </Key>
+          <Property Name="ID_staff" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_position" Type="int" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="image" />
+          <Property Name="E-mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="int" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passpost" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Requisites" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID_status" />
+          </Key>
+          <Property Name="ID_status" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="To_catygories_table">
+          <End Role="Catygories" Type="Self.Catygories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catygories">
+              <PropertyRef Name="ID_category" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_owners_table">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID_owner" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_position_table">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_position" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="ID_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_product_table">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_staff_table">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_staff" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_statuses_table">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID_status" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Insert_User" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_position" Type="int" Mode="In" />
+          <Parameter Name="FIO" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="E_mail" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="int" Mode="In" />
+          <Parameter Name="Adress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Passpost" Type="nvarchar" Mode="In" />
+          <Parameter Name="Requisites" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="E_mail" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Polina_ZlobinaModelStoreContainer">
+          <EntitySet Name="Catygories" EntityType="Self.Catygories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="To_catygories_table" Association="Self.To_catygories_table">
+            <End Role="Catygories" EntitySet="Catygories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="To_owners_table" Association="Self.To_owners_table">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="To_position_table" Association="Self.To_position_table">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="To_product_table" Association="Self.To_product_table">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="To_staff_table" Association="Self.To_staff_table">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="To_statuses_table" Association="Self.To_statuses_table">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Polina_ZlobinaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Catygories">
+          <Key>
+            <PropertyRef Name="ID_category" />
+          </Key>
+          <Property Name="ID_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.To_catygories_table" FromRole="Catygories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="ID_owner" />
+          </Key>
+          <Property Name="ID_owner" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Requisites" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.To_owners_table" FromRole="Owners" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID_position" />
+          </Key>
+          <Property Name="ID_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Staff" Relationship="Self.To_position_table" FromRole="Position" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ID_product" />
+          </Key>
+          <Property Name="ID_product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_owner" Type="Int32" Nullable="false" />
+          <Property Name="ID_status" Type="Int32" Nullable="false" />
+          <Property Name="ID_category" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Num_off" Type="Int32" Nullable="false" />
+          <Property Name="Data_start" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Data_end" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Commentary" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Catygories" Relationship="Self.To_catygories_table" FromRole="Products" ToRole="Catygories" />
+          <NavigationProperty Name="Owners" Relationship="Self.To_owners_table" FromRole="Products" ToRole="Owners" />
+          <NavigationProperty Name="Sales" Relationship="Self.To_product_table" FromRole="Products" ToRole="Sales" />
+          <NavigationProperty Name="Statuses" Relationship="Self.To_statuses_table" FromRole="Products" ToRole="Statuses" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="ID_sale" />
+          </Key>
+          <Property Name="ID_sale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_product" Type="Int32" Nullable="false" />
+          <Property Name="ID_staff" Type="Int32" Nullable="false" />
+          <Property Name="Data_sale" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="Self.To_product_table" FromRole="Sales" ToRole="Products" />
+          <NavigationProperty Name="Staff" Relationship="Self.To_staff_table" FromRole="Sales" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_staff" />
+          </Key>
+          <Property Name="ID_staff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_position" Type="Int32" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="Int32" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passpost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Requisites" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="Self.To_position_table" FromRole="Staff" ToRole="Position" />
+          <NavigationProperty Name="Sales" Relationship="Self.To_staff_table" FromRole="Staff" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="ID_status" />
+          </Key>
+          <Property Name="ID_status" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.To_statuses_table" FromRole="Statuses" ToRole="Products" />
+        </EntityType>
+        <Association Name="To_catygories_table">
+          <End Role="Catygories" Type="Self.Catygories" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Catygories">
+              <PropertyRef Name="ID_category" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_owners_table">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="ID_owner" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_position_table">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID_position" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="ID_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_product_table">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ID_product" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_statuses_table">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="ID_status" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ID_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="To_staff_table">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_staff" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ID_staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Polina_ZlobinaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Catygories" EntityType="Self.Catygories" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" />
+          <EntitySet Name="Position" EntityType="Self.Position" />
+          <EntitySet Name="Products" EntityType="Self.Products" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" />
+          <AssociationSet Name="To_catygories_table" Association="Self.To_catygories_table">
+            <End Role="Catygories" EntitySet="Catygories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="To_owners_table" Association="Self.To_owners_table">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="To_position_table" Association="Self.To_position_table">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="To_product_table" Association="Self.To_product_table">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="To_statuses_table" Association="Self.To_statuses_table">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="To_staff_table" Association="Self.To_staff_table">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <FunctionImport Name="Insert_User" ReturnType="Collection(Int32)">
+            <Parameter Name="ID_position" Mode="In" Type="Int32" />
+            <Parameter Name="FIO" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="E_mail" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="Int32" />
+            <Parameter Name="Adress" Mode="In" Type="String" />
+            <Parameter Name="Passpost" Mode="In" Type="String" />
+            <Parameter Name="Requisites" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(Polina_ZlobinaModel.LoginByUsernamePassword_Result)">
+            <Parameter Name="E_mail" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="String" Name="E_mail" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Password" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Polina_ZlobinaModelStoreContainer" CdmEntityContainer="Polina_ZlobinaEntities">
+          <EntitySetMapping Name="Catygories">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Catygories">
+              <MappingFragment StoreEntitySet="Catygories">
+                <ScalarProperty Name="ID_category" ColumnName="ID_category" />
+                <ScalarProperty Name="Name_category" ColumnName="Name_category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Owners">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="ID_owner" ColumnName="ID_owner" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="E_mail" ColumnName="E_mail" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Requisites" ColumnName="Requisites" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="ID_position" ColumnName="ID_position" />
+                <ScalarProperty Name="Name_position" ColumnName="Name_position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Products">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ID_product" ColumnName="ID_product" />
+                <ScalarProperty Name="ID_owner" ColumnName="ID_owner" />
+                <ScalarProperty Name="ID_status" ColumnName="ID_status" />
+                <ScalarProperty Name="ID_category" ColumnName="ID_category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Num_off" ColumnName="Num_off" />
+                <ScalarProperty Name="Data_start" ColumnName="Data_start" />
+                <ScalarProperty Name="Data_end" ColumnName="Data_end" />
+                <ScalarProperty Name="Commentary" ColumnName="Commentary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Sales">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="ID_sale" ColumnName="ID_sale" />
+                <ScalarProperty Name="ID_product" ColumnName="ID_product" />
+                <ScalarProperty Name="ID_staff" ColumnName="ID_staff" />
+                <ScalarProperty Name="Data_sale" ColumnName="Data_sale" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ID_staff" ColumnName="ID_staff" />
+                <ScalarProperty Name="ID_position" ColumnName="ID_position" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Passpost" ColumnName="Passpost" />
+                <ScalarProperty Name="Requisites" ColumnName="Requisites" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="Polina_ZlobinaModel.Statuses">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="ID_status" ColumnName="ID_status" />
+                <ScalarProperty Name="Name_status" ColumnName="Name_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Insert_User" FunctionName="Polina_ZlobinaModel.Store.Insert_User" />
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="Polina_ZlobinaModel.Store.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Polina_ZlobinaModel.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

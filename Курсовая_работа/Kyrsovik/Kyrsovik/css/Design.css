@@ -1,0 +1,122 @@
+﻿body {
+    color: #2F4F4F;
+    background-color: #DAA520;
+    padding: 3em 0;
+    background-position-x: initial;
+    background-position-y: initial;
+    background-size: initial;
+    background-repeat-x: initial;
+    background-repeat-y: initial;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+}
+
+h2{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	
+}
+h1{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	
+}
+h3{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;	
+}
+/*table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  border-collapse: collapse;
+  color: #686461;
+}
+caption {
+  padding: 10px;
+  color: white;
+  background: #A600A6;
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+}
+th {
+  border-bottom: 3px solid #B9B29F;
+  border: black 10px;
+  padding: 10px;
+  text-align: left;
+}
+td {
+	  color: #686461;
+  padding: 10px;
+}
+tr:nth-child(odd) {
+  background: white;
+}
+tr:nth-child(even) {
+  background: #DAFB3F;
+}*/
+
+
+table {width: 100%; border-collapse: collapse; }
+table thead tr {color: #DAFB3F; font-weight: bold; background: #DAFB3F;}
+table thead tr td {border: 1px solid #DAFB3F;}
+table tbody tr td {border: 1px solid #e8e9eb;}
+table tbody tr:nth-child(2n) {background: #ffffff;}
+table tbody tr:hover {background: #DAFB3F;}
+table tbody th { background:#DAFB3F;}
+
+
+
+
+.koteImg{
+    background-color: transparent;
+    border-color: transparent;
+}
+.navbar-inverse {
+    background-color: #4F2982;
+    border-color: #DAFB3F;
+	 color: #4F2982;
+}
+    .navbar-inverse .navbar-brand {
+        color: #DAFB3F;
+		  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    }
+    .navbar-inverse .navbar-text {
+        color: #9d9d9d;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #e3f9f5;
+    }
+	IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+.button {
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  padding: .8em 1em calc(.8em + 3px);
+  border-radius: 3px;
+  background: #4F2982;
+  box-shadow: 0 -3px #8643D6 inset;
+  transition: 0.2s;
+} 
+.button:hover { background: #AD009F; }
+.button:active {
+  background: #DAFB3F;
+  box-shadow: 0 3px rgb(33,147,90) inset;
+}
+.jumbotron {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: #DAFB3F;
+    background-color: #4F2982;
+}
+a {
+    color: #40514e;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #1ae4ca !important;
+}

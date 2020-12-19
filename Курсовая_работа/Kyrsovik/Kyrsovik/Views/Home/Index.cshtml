@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Добро пожаловать!</h1>
+    <p class="lead">Вы вошли как @User.Identity.Name</p><br />
+</div>
+
+<img src="~/img/an2.png" alt="Image" width="680" class="displayed" /><br>
+                                                                     <table>
+<tr> <td>@Html.ActionLink("Список предметов", "Index", "Products")</td></tr>
+<tr> <td>@Html.ActionLink("Список работников", "Index", "Staffs")</td> </tr>
+ <tr> <td> @Html.ActionLink("Список владельцев", "Index", "Owners") </td></tr>
+ <tr><td>@Html.ActionLink("Продажи", "Index", "Sales")</td> </tr>
+<tr><td>@Html.ActionLink("Категории", "Index", "Catygories")</td></tr>
+<tr><td>@Html.ActionLink("Статусы", "Index", "Statuses")</td></tr>
+<tr><td>@Html.ActionLink("Должности", "Index", "Positions")</td></tr>
+</table>
+
+

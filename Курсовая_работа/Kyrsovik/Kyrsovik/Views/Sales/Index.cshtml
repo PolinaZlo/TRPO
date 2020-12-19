@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Kyrsovik.Models.Sales>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Список продаж</h2>
+<h3>
+    Добавить<i><u> @Html.ActionLink(" новую продажу ", "Create")</u></i>
+</h3>
+@using (Html.BeginForm())
+{
+    <p>
+        Найти по названию: @Html.TextBox("searchString")
+        <input type="submit" value="Найти" />
+    </p>
+
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Дата продажи", "Index", new { sortOrder = ViewBag.DataSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Наименование товара", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Продавец", "Index", new { sortOrder = ViewBag.StaffSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_sale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.FIO)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_sale }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_sale }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_sale })
+            </td>
+        </tr>
+    }
+
+</table>

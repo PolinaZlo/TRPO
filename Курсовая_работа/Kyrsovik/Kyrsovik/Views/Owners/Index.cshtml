@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Kyrsovik.Models.Owners>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список владельцев</h2>
+
+<h3>
+    Добавить<i><u> @Html.ActionLink(" нового владельца ", "Create")</u></i>
+</h3>
+@using (Html.BeginForm())
+{
+    <p>
+        Найти по ФИО: @Html.TextBox("searchString")
+        <input type="submit" value="Найти" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("ФИО владельца", "Index", new { sortOrder = ViewBag.FIOSortParm })
+        </th>
+        <th>
+            <p>Телефон</p>
+        </th>
+        <th>
+            <p>E-mail</p>
+        </th>
+        <th>
+            <p>Пасспортные данные</p>
+        </th>
+        <th>
+            <p>Реквизиты</p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.E_mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passport)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requisites)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_owner }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_owner }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_owner })
+            </td>
+        </tr>
+    }
+
+</table>

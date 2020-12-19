@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Kyrsovik.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список работников</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Найти по ФИО: @Html.TextBox("searchString")
+        <input type="submit" value="Найти" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("ФИО", "Index", new { sortOrder = ViewBag.FIOSortParm })
+        </th>
+        <th>
+            <p>Телефон</p>
+        </th>
+        <th>
+            <p>Фото</p>
+        </th>
+        <th>
+            <p>E-mail</p>
+        </th>
+        <th>
+            <p>Пароль</p>
+        </th>
+        <th>
+            <p>Адрес проживания</p>
+        </th>
+        <th>
+            <p>Паспортные данные</p>
+        </th>
+        <th>
+            <p>Реквизиты</p>
+        </th>
+        <th>
+            @Html.ActionLink("Должность", "Index", new { sortOrder = ViewBag.PositionSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <div class="editor-field">
+                    @if (item.Photo == null)
+                    {
+                        @:None
+                    }
+                    else
+                    {
+                        byte[] photo = item.Photo;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            MemoryStream ms = new MemoryStream();
+                            ms.Write(photo, 0, photo.Length);
+                            string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                            imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                            string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                        }
+
+                        <img width="250" height="150" src="@imageSrc" />
+
+                    }
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.E_mail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passpost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requisites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position.Name_position)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_staff }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_staff }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_staff })
+            </td>
+        </tr>
+    }
+
+</table>

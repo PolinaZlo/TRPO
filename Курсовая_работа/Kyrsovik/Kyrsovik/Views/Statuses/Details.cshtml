@@ -1,0 +1,26 @@
+﻿@model Kyrsovik.Models.Statuses
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Statuses</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_status }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

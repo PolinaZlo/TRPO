@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Kyrsovik.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Списки предметов</h2>
+<h3>
+    Добавить<i><u> @Html.ActionLink(" новый предмет ", "Create")</u></i>
+</h3>
+@using (Html.BeginForm())
+{
+    <p>
+        Найти по названию: @Html.TextBox("searchString")
+        <input type="submit" value="Найти" />
+        <br><br><br>
+        Отсортировать по категориям
+        @Html.DropDownList("Catygories", new SelectList(ViewBag.Catygories, "ID_category", "Name_category"))
+        <input type="submit" name="b" value="Сортировка" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Наименование товара", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("Цена", "Index", new { sortOrder = ViewBag.PriceSortParm })
+        </th>
+        <th>
+            <p>Фото</p>
+        </th>
+        <th>
+            <p>Количество списаний</p>
+        </th>
+        <th>
+            <p>Дата поступления</p>
+        </th>
+        <th>
+            <p>Дата истечения срока продажи</p>
+        </th>
+        <th>
+            <p>Комментарий</p>
+        </th>
+        <th>
+            <p>Категория</p>
+        </th>
+        <th>
+            <p>ФИО владельца</p>
+        </th>
+        <th>
+            @Html.ActionLink("Статус", "Index", new { sortOrder = ViewBag.StatusSortParm })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <div class="editor-field">
+                    @if (item.Photo == null)
+                    {
+                        @:None
+                    }
+                    else
+                    {
+                        byte[] photo = item.Photo;
+                        string imageSrc = null;
+                        if (photo != null)
+                        {
+                            MemoryStream ms = new MemoryStream();
+                            ms.Write(photo, 0, photo.Length);
+                            string imageBase64 = Convert.ToBase64String(ms.ToArray());
+                            imageSrc = string.Format("data:image/jpg;base64,{0}", imageBase64);
+                            string base64String = Convert.ToBase64String(photo, 0, photo.Length);
+                        }
+
+                        <img width="250" height="150" src="@imageSrc" />
+
+                    }
+                </div>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Num_off)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commentary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Catygories.Name_category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owners.FIO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Statuses.Name_status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_product }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_product }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_product })
+            </td>
+
+        </tr>
+    }
+
+</table>
+<input class="button" type="button" value="Распечатать" onclick="window.print();">
