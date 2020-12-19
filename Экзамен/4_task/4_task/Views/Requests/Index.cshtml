@@ -1,0 +1,67 @@
+﻿@model IEnumerable<_4_task.Models.Request>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Заявки</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+        <br /><br />Отсортировать заявки по турам
+        @Html.DropDownList("Tours", new SelectList(ViewBag.Tours, "Id_tour", "Name_tour")) <input type="submit" name="b" value="Сортировка" />
+    </p>
+}
+    <table class="table">
+        <tr>
+            <th>
+                <p>Дата тура</p>
+            </th>
+            <th>
+                <p>ФИО клиента</p>
+            </th>
+            <th>
+                <p>Дата рождения</p>
+            </th>
+            <th>
+                <p>Паспорт</p>
+            </th>
+            <th>
+                <p>Загранпаспорт</p>
+            </th>
+            <th>
+                <p>Название тура</p>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_tour)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIO_client)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birth_data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inter_Passport)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tour.Name_tour)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_request }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id_request })
+                </td>
+            </tr>
+        }
+
+    </table>

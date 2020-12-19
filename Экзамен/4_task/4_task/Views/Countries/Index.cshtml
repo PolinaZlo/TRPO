@@ -1,0 +1,32 @@
+﻿@model IEnumerable<_4_task.Models.Country>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Страны</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>Наименование страны</p>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name_country)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_country }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_country })
+        </td>
+    </tr>
+}
+
+</table>

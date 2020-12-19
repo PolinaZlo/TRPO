@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Туристическая компания</h1>
+</div>
+<h3>
+@Html.ActionLink("Туры", "Index", "Tours")<br/><br />
+@Html.ActionLink("Заявки", "Index", "Requests")<br /><br />
+@Html.ActionLink("Менеджеры", "Index", "Managers")<br /><br />
+@Html.ActionLink("Страны", "Index", "Countries")<br />
+    </h3>

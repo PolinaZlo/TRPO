@@ -1,0 +1,66 @@
+﻿@model _4_task.Models.Request
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_tour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_tour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIO_client)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIO_client)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birth_data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birth_data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Passport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Passport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Inter_Passport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inter_Passport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tour.Name_tour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tour.Name_tour)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_request }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

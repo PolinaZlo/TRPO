@@ -1,0 +1,50 @@
+﻿@model _4_task.Models.Tour
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tour</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name_tour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name_tour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description_tour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description_tour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Name_country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name_country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Managers.FIO_manager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Managers.FIO_manager)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_tour }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

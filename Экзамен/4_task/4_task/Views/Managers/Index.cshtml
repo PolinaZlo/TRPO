@@ -1,0 +1,32 @@
+﻿@model IEnumerable<_4_task.Models.Managers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Менеджеры</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>ФИО менеджера</p>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FIO_manager)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_manager }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_manager })
+        </td>
+    </tr>
+}
+
+</table>

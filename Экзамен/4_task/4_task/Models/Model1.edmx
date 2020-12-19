@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Travel_CompanyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id_country" />
+          </Key>
+          <Property Name="Id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_country" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id_manager" />
+          </Key>
+          <Property Name="Id_manager" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO_manager" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id_request" />
+          </Key>
+          <Property Name="Id_request" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_tour" Type="int" Nullable="false" />
+          <Property Name="Data_tour" Type="date" Nullable="false" />
+          <Property Name="FIO_client" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birth_data" Type="date" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Inter_Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="Id_tour" />
+          </Key>
+          <Property Name="Id_tour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_country" Type="int" Nullable="false" />
+          <Property Name="Id_manager" Type="int" Nullable="false" />
+          <Property Name="Name_tour" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description_tour" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="country_key">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id_country" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Id_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="manager_key">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id_manager" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Id_manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tour_key">
+          <End Role="Tour" Type="Self.Tour" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="Id_tour" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Id_tour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Travel_CompanyModelStoreContainer">
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tour" EntityType="Self.Tour" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="country_key" Association="Self.country_key">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="manager_key" Association="Self.manager_key">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="tour_key" Association="Self.tour_key">
+            <End Role="Tour" EntitySet="Tour" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Travel_CompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id_country" />
+          </Key>
+          <Property Name="Id_country" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tour" Relationship="Self.country_key" FromRole="Country" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="Managers">
+          <Key>
+            <PropertyRef Name="Id_manager" />
+          </Key>
+          <Property Name="Id_manager" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO_manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tour" Relationship="Self.manager_key" FromRole="Managers" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="Id_request" />
+          </Key>
+          <Property Name="Id_request" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_tour" Type="Int32" Nullable="false" />
+          <Property Name="Data_tour" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FIO_client" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birth_data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Inter_Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tour" Relationship="Self.tour_key" FromRole="Request" ToRole="Tour" />
+        </EntityType>
+        <EntityType Name="Tour">
+          <Key>
+            <PropertyRef Name="Id_tour" />
+          </Key>
+          <Property Name="Id_tour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_country" Type="Int32" Nullable="false" />
+          <Property Name="Id_manager" Type="Int32" Nullable="false" />
+          <Property Name="Name_tour" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description_tour" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Country" Relationship="Self.country_key" FromRole="Tour" ToRole="Country" />
+          <NavigationProperty Name="Managers" Relationship="Self.manager_key" FromRole="Tour" ToRole="Managers" />
+          <NavigationProperty Name="Request" Relationship="Self.tour_key" FromRole="Tour" ToRole="Request" />
+        </EntityType>
+        <Association Name="country_key">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id_country" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Id_country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="manager_key">
+          <End Role="Managers" Type="Self.Managers" Multiplicity="1" />
+          <End Role="Tour" Type="Self.Tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Managers">
+              <PropertyRef Name="Id_manager" />
+            </Principal>
+            <Dependent Role="Tour">
+              <PropertyRef Name="Id_manager" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tour_key">
+          <End Role="Tour" Type="Self.Tour" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tour">
+              <PropertyRef Name="Id_tour" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Id_tour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Travel_CompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="Managers" EntityType="Self.Managers" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="Tour" EntityType="Self.Tour" />
+          <AssociationSet Name="country_key" Association="Self.country_key">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="manager_key" Association="Self.manager_key">
+            <End Role="Managers" EntitySet="Managers" />
+            <End Role="Tour" EntitySet="Tour" />
+          </AssociationSet>
+          <AssociationSet Name="tour_key" Association="Self.tour_key">
+            <End Role="Tour" EntitySet="Tour" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Travel_CompanyModelStoreContainer" CdmEntityContainer="Travel_CompanyEntities">
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="Travel_CompanyModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="Id_country" ColumnName="Id_country" />
+                <ScalarProperty Name="Name_country" ColumnName="Name_country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Managers">
+            <EntityTypeMapping TypeName="Travel_CompanyModel.Managers">
+              <MappingFragment StoreEntitySet="Managers">
+                <ScalarProperty Name="Id_manager" ColumnName="Id_manager" />
+                <ScalarProperty Name="FIO_manager" ColumnName="FIO_manager" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="Travel_CompanyModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="Id_request" ColumnName="Id_request" />
+                <ScalarProperty Name="Id_tour" ColumnName="Id_tour" />
+                <ScalarProperty Name="Data_tour" ColumnName="Data_tour" />
+                <ScalarProperty Name="FIO_client" ColumnName="FIO_client" />
+                <ScalarProperty Name="Birth_data" ColumnName="Birth_data" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Inter_Passport" ColumnName="Inter_Passport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tour">
+            <EntityTypeMapping TypeName="Travel_CompanyModel.Tour">
+              <MappingFragment StoreEntitySet="Tour">
+                <ScalarProperty Name="Id_tour" ColumnName="Id_tour" />
+                <ScalarProperty Name="Id_country" ColumnName="Id_country" />
+                <ScalarProperty Name="Id_manager" ColumnName="Id_manager" />
+                <ScalarProperty Name="Name_tour" ColumnName="Name_tour" />
+                <ScalarProperty Name="Description_tour" ColumnName="Description_tour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
